@@ -1,0 +1,22 @@
+            {
+                "users": [{
+                       "email":"alice@mail.com",
+                       "password":"alice123"
+}],
+                "products": [
+                    {
+                        "id": 1,
+                        "name": "Casque",
+                        "sku": "CASQUE123",
+                        "stock": 15,
+                        "price": 50.0
+                    },
+                    {
+                        "id": 2,
+                        "name": "Product 2",
+                        "sku": "PROD2SKU",
+                        "stock": 30,
+                        "price": 20.0
+                    }
+                ]
+            }
