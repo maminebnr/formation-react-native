@@ -10,8 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@expo/vector-icons": "^15.0.3",
     "cors": "^2.8.5",
     "json-server": "^0.17.3",
-    "json-server-auth": "^2.1.0"
+    "json-server-auth": "^2.1.0",
+    "nativewind": "^4.2.1",
+    "tailwindcss": "^3.4.18"
   }
 }
