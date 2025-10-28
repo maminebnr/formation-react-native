@@ -4,6 +4,8 @@ import OnboardingScreen from './screens/OnboardingScreen';
 import LoginScreen from './screens/LoginScreen';
 import ListScreen from './screens/ListScreen';
 import PostsListScreen from './screens/PostListScreen';
+import PostDetailScreen from './screens/PostDetailScreen';
+import PostCreateScreen from './screens/PostCreateScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -25,6 +27,14 @@ export default function App() {
           name="Products" 
           component={PostsListScreen} 
         />
+           <Stack.Screen 
+          name="PostDetail" 
+          component={PostDetailScreen} 
+        />
+       <Stack.Screen 
+          name="PostCreate" 
+          component={PostCreateScreen} 
+        />  
       </Stack.Navigator>
     </NavigationContainer>
   );
