@@ -21,7 +21,6 @@ export default function ProfileScreen() {
       <Text style={s.l}>Email</Text>
       <Input value={user?.email} editable={false} />
       <Button onPress={save}>Enregistrer</Button>
-     <Button style={{ backgroundColor: '#ff0000ff' }} onPress={signOut}>logout</Button>
       <Text style={s.info}>Déconnexion dans l'en-tête</Text>
     </View>
   );

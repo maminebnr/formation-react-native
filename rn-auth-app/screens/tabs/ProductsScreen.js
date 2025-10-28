@@ -35,7 +35,7 @@ function ProductsScreen() {
     setOpenDelete(true);
   };
   const save = async () => {
-    const d = { name, sku, stock: Number(stock || 0), userId: user.id };
+    const d = { name, sku, stock: Number(stock || 0), userId: user.id,createdAt: new Date().toISOString() };
     console.log(d)
     if (edit) await ProductsApi.update(edit.id, d);
     else await ProductsApi.create(d);

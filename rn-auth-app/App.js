@@ -8,7 +8,10 @@ import LoginScreen from './screens/auth/LoginScrenn';
 import RegisterScreen from './screens/auth/RegisterScreen';
 import HomeScreen from './screens/tabs/HomeScreen';
 import ProductsScreen from './screens/tabs/ProductsScreen';
-import ProfileScreen from './screens/tabs/ProfileScreen';
+import ProfileWithHeader from './screens/tabs/ProfileWithHeader';
+import { Ionicons } from '@expo/vector-icons';
+import DashboardScreen from './screens/tabs/DashboardScreen';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,38 +20,41 @@ function PublicStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   );
 }
 
 function AppTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ title: 'Accueil' }} 
-      />
-      <Tab.Screen 
-        name="Products" 
-        component={ProductsScreen}
-        options={{ title: 'Produits' }} 
-      />
-      <Tab.Screen 
-        name="Profile" 
-        component={ProfileScreen}
-        options={{ title: 'Profil' }} 
-      />
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused, size }) => {
+          const icons = {
+            Dashboard :focused ?'stats-chart' : 'stats-chart-outline',
+            Home: focused ? 'home' : 'home-outline',
+            Products: focused ? 'pricetags' : 'pricetags-outline',
+            Profile: focused ? 'person' : 'person-outline'
+            ,
+          };
+          return <Ionicons name={icons[route.name]} size={size} />;
+        },
+      })}
+    >
+      <Tab.Screen name="Dashboard" component={DashboardScreen} options={{ headerTitle:'Dashboard',headerShown:true}} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ headerTitle:'home',headerShown:true}} />
+      <Tab.Screen name="Products" component={ProductsScreen} options={{ title: 'Produits',headerShown:true }} />
+      <Tab.Screen name="Profile" component={ProfileWithHeader} options={{ title: 'Profil' }} />
     </Tab.Navigator>
   );
 }
 
 function Root() {
   const { token, init } = useAuth();
-  
+
   if (init) return null;
-  
+
   return token ? <AppTabs /> : <PublicStack />;
 }
 
