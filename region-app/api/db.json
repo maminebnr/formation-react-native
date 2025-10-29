@@ -1,0 +1,29 @@
+{
+  "users": [
+    { "email": "admin@test.com", "password": "admin123", "name": "Administrateur" }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "name": "Région Nord",
+      "areas": [
+        {
+          "id": 101,
+          "name": "Zone A",
+          "units": [
+            {
+              "id": 1001,
+              "name": "Unité 1",
+              "pillars": [
+                { "id": 9001, "name": "Pilier A", "description": "Description courte" },
+                { "id": 9002, "name": "Pilier B", "description": "Description courte" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    { "id": 2, "name": "Région Centre", "areas": [] }
+  ]
+}
+
