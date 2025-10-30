@@ -1,28 +1,23 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import RegionsScreen from '../screens/RegionsScreen';
-import AreasScreen from '../screens/AreasScreen';
-import UnitsScreen from '../screens/UnitsScreen';
-import PillarsScreen from '../screens/PillarsScreen';
-import ActionsScreen from '../screens/ActionsScreen';
+import ExplorerScreen from '../screens/ExplorerScreen';
+import ItemFormScreen from '../screens/ItemFormScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { useAuth } from '../auth/useAuth';
-import { Text } from 'react-native';
-import ProfileWithHeader from '../screens/ProfileWithHeader';
+
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Regions" component={RegionsScreen} options={{ title: 'Régions' }} />
-      <Stack.Screen name="Areas" component={AreasScreen} options={{ title: 'Zones' }} />
-      <Stack.Screen name="Units" component={UnitsScreen} options={{ title: 'Unités' }} />
-      <Stack.Screen name="Pillars" component={PillarsScreen} options={{ title: 'Piliers' }} />
+      <Stack.Screen name="Explorer" component={ExplorerScreen} options={{ title: 'Explorer' }} />
+      <Stack.Screen name="ItemForm" component={ItemFormScreen} options={{ title: 'Formulaire' }} />
     </Stack.Navigator>
   );
 }
@@ -30,17 +25,28 @@ function HomeStack() {
 function AppTabs() {
   return (
     <Tabs.Navigator screenOptions={{ headerShown: false }}>
-      <Tabs.Screen name="HomeTab" component={HomeStack} options={{ title: 'Accueil' }} />
-      <Tabs.Screen name="Actions" component={ActionsScreen} options={{ title: 'Actions' }} />
-      <Tabs.Screen name="Profile" component={ProfileWithHeader} options={{ title: 'Profil' }} />
+      <Tabs.Screen
+        name="HomeTab"
+        component={HomeStack}
+        options={{
+          title: 'Explorer',
+          tabBarIcon: ({ color, size }) => <Ionicons name="list" color={color} size={size} />
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: 'Profil',
+          tabBarIcon: ({ color, size }) => <Ionicons name="person" color={color} size={size} />
+        }}
+      />
     </Tabs.Navigator>
   );
 }
 
 export default function RootNavigation() {
-  const { token, loading } = useAuth();
-  if (loading) return <Text style={{ marginTop: 50, textAlign: 'center' }}>Chargement…</Text>;
-
+  const { token } = useAuth();
   return (
     <NavigationContainer>
       {token ? (

@@ -5,20 +5,23 @@ const cors = require('cors');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-
-server.db = router.db; // requis par json-server-auth
+server.db = router.db;
 
 server.use(cors());
 server.use(jsonServer.bodyParser);
 
-// Auth (POST /register, POST /login)
+// Alias confortables
+server.use(jsonServer.rewriter({
+  '/regions': '/الأقاليم',
+  '/regions/:id': '/الأقاليم/:id'
+}));
+
+// Auth
 server.use(auth);
 
-// Routes REST
+// Routes
 server.use(middlewares);
 server.use(router);
 
-const PORT = 7000;
-server.listen(PORT, () => {
-  console.log(`✅ API démarrée: http://localhost:${PORT}`);
-});
+const PORT = 3001;
+server.listen(PORT, () => console.log(`API: http://localhost:${PORT}`));
